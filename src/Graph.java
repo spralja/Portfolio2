@@ -29,11 +29,13 @@ public class Graph {
         if(vertices.get(vertex) == null) {
             return addVertex(vertex);
         }
+
         return vertices.get(vertex);
     }
 
-    public Vertex addVertex(String vertex) {
-        return vertices.put(vertex, new Vertex(vertex));
+    private Vertex addVertex(String vertex) {
+        vertices.put(vertex, new Vertex(vertex));
+        return this.getVertex(vertex);
     }
 
 }
