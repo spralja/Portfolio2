@@ -1,8 +1,11 @@
+import java.util.HashMap;
+
 public class MinHeap implements PriorityQueue{
     private static final int DEFAULT_CAPACITY = 1024;
     private Entry[] data = null;
     private int capacity = DEFAULT_CAPACITY;
     private int size = 0;
+    private HashMap< String, Integer> indices = new HashMap<>();
     public MinHeap(int capacity) {
         this.capacity = capacity;
         data = new Entry[this.capacity];
@@ -17,6 +20,7 @@ public class MinHeap implements PriorityQueue{
         ++size;
         int curr = size;
         data[curr] = new Entry(key, value);
+        indices.put(key, curr);
 
         while(isSmaller(curr, getParentIndex(curr))) {
             swap(curr, getParentIndex(curr));
@@ -62,10 +66,39 @@ public class MinHeap implements PriorityQueue{
         return this.size;
     }
 
+    @Override
+    public void update(String key, int value) {
+        int curr = indices.get(key);
+        if(value <= data[curr].getValue()) {
+            data[curr] = new Entry(key, value);
+            while(isSmaller(curr, getParentIndex(curr))) {
+                swap(curr, getParentIndex(curr));
+                curr = getParentIndex(curr);
+            }
+        } else {
+            data[curr] = new Entry(key, value);
+            while(
+                    !isSmaller(curr, getLeftChildIndex(curr)) ||
+                            !isSmaller(curr, getRightChildIndex(curr))
+            ) {
+                if(isSmaller(getLeftChildIndex(curr), getRightChildIndex(curr))) {
+                    swap(curr, getLeftChildIndex(curr));
+                    curr = getLeftChildIndex(curr);
+                } else {
+                    swap(curr, getRightChildIndex(curr));
+                    curr = getRightChildIndex(curr);
+                }
+            }
+        }
+
+    }
+
     private void swap(int index1, int index2) {
         Entry temp = data[index1];
         data[index1] = data[index2];
+        if(data[index1] != null) indices.put(data[index1].getKey(), index1);
         data[index2] = temp;
+        if(data[index2] != null) indices.put(data[index2].getKey(), index2);
     }
 
     private boolean isSmaller(int index1, int index2) {
