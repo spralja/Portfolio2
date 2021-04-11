@@ -6,8 +6,8 @@ public class Graph {
     private HashMap<String, Vertex> vertices = new HashMap<>();
     private class Vertex {
         private String key;
-        private LinkedList<Vertex> adjacent = new LinkedList<>();
-        private LinkedList<Integer> weights = new LinkedList<>();
+        private ArrayList<Vertex> adjacent = new ArrayList<>();
+        private ArrayList<Integer> weights = new ArrayList<>();
         public Vertex(String key) {
             this.key = key;
         }
