@@ -1,9 +1,10 @@
 public class Main {
+    private static final int COST_PER_KM = 100000;
     public static void main(String[] args) {
         String[][] data = {
-                {"Edilskrup", "Maribo", "28"},
-                {"Edilskrup", "Nykoebnig", "13"},
-                {"Edilskrup", "Vordingborg", "24"},
+                {"Eskildstrup", "Maribo", "28"},
+                {"Eskildstrup", "Nykoebing F", "13"},
+                {"Eskildstrup", "Vordingborg", "24"},
                 {"Haslev", "Korsoer", "60"},
                 {"Haslev", "Koege", "24"},
                 {"Haslev", "Naestved", "25"},
@@ -19,25 +20,26 @@ public class Main {
                 {"Holbaek", "Roskilde", "32"},
                 {"Holbaek", "Slagelse", "46"},
                 {"Holbaek", "Soroe", "34"},
-                {"Jaergerpris", "Korsoer", "95"},
-                {"Jaergerpris", "Koege", "58"},
-                {"Jaergerpris", "Ringsted", "56"},
-                {"Jaergerpris", "Roskilde", "33"},
-                {"Jaergerpris", "Slagelse", "39"},
-                {"Jaergerpris", "Soroe", "51"},
-                {"Kalundborg", "Ringsted", "56"},
+                {"Jaergerspris", "Korsoer", "95"},
+                {"Jaergerspris", "Koege", "58"},
+                {"Jaergerspris", "Ringsted", "56"},
+                {"Jaergerspris", "Roskilde", "33"},
+                {"Jaergerspris", "Slagelse", "74"},
+                {"Jaergerspris", "Soroe", "63"},
+                {"Kalundborg", "Ringsted", "62"},
                 {"Kalundborg", "Roskilde", "70"},
-                {"Klaundborg", "Slagelse", "39"},
-                {"Klaundborg", "Soroe", "51"},
+                {"Kalundborg", "Slagelse", "39"},
+                {"Kalundborg", "Soroe", "51"},
                 {"Korsoer", "Naestved", "45"},
                 {"Korsoer", "Slagelse", "20"},
                 {"Koege", "Naestved", "45"},
-                {"Koege", "Ringsted", "29"},
+                {"Koege", "Ringsted", "28"},
                 {"Koege", "Roskilde", "25"},
-                {"Koege", "Vodringborg", "60"},
+                {"Koege", "Vordingborg", "60"},
                 {"Maribo", "Nakskov", "27"},
-                {"Maribo", "Nykboeling F", "26"},
+                {"Maribo", "Nykoebing F", "26"},
                 {"Naestved", "Roskilde", "57"},
+                {"Naestved", "Ringsted", "26"},
                 {"Naestved", "Slagelse", "37"},
                 {"Naestved", "Soroe", "32"},
                 {"Naestved", "Vordingborg", "28"},
@@ -48,7 +50,7 @@ public class Main {
         };
 
         Graph g = new Graph(data);
-
+        System.out.print(Graph.minimumSpanningTreeTotalWeight(g) * COST_PER_KM + " DKK");
 
     }
 }
