@@ -50,7 +50,7 @@ public class Main {
         };
 
         Graph g = new Graph(data);
-        System.out.print(Graph.minimumSpanningTreeTotalWeight(g) * COST_PER_KM + " DKK");
+        Graph.printMSTPrims(g);
 
     }
 }

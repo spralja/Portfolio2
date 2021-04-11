@@ -47,7 +47,7 @@ public class Graph {
         return this.getVertex(vertex);
     }
 
-    public static int minimumSpanningTreeTotalWeight(Graph g) {
+    public static void printMSTPrims(Graph g) {
         Object[] vertices = g.vertices.keySet().toArray();
         String[] keys = new String[vertices.length];
         for (int i = 0; i < keys.length; ++i) {
@@ -88,11 +88,16 @@ public class Graph {
             }
         }
 
+        for(int i = 0; i < keys.length; ++i) {
+            if(parent.get(keys[i]) == null) continue;
+            System.out.println(keys[i] + " " + parent.get(keys[i]) + " " + dist.get(keys[i]));
+        }
+
         int r = 0;
         for(int i = 0; i < keys.length; ++i) {
             r += dist.get(keys[i]);
-            System.out.println(keys[i] + " " + dist.get(keys[i]) + " " + parent.get(keys[i]));
         }
-        return r;
+
+        System.out.println("Total cost: " + r + " DKK");
     }
 }
