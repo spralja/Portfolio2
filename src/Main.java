@@ -53,5 +53,5 @@ public class Main {
         Graph.printMSTPrims(g, COST_PER_KM);
 
     }
-    
+
 }
