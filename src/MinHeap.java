@@ -2,34 +2,29 @@ import java.util.HashMap;
 
 public class MinHeap implements PriorityQueue{
     /**
-     * Default capacity of the array that represents the minHeap (the acctual capacity is one smaller because the first
+     * Default capacity of the array that represents the minHeap (the actual capacity is one smaller because the first
      * element is null)
      */
     private static final int DEFAULT_CAPACITY = 1024;
     /**
      * The array that represents the heap
      */
-    private Entry[] data;
-    /**
-     * The capacity of the array that represents minHeap
-     */
-    private int capacity;
+    private final Entry[] data;
     /**
      * The number of elements in the minHeap
      */
     private int size = 0;
     /**
-     * a HashMap that links names of vertices to their index to accomodate the update method
+     * a HashMap that links names of vertices to their index to accommodate the update method
      */
-    private HashMap< String, Integer> indices = new HashMap<>();
+    private final HashMap< String, Integer> indices = new HashMap<>();
 
     /**
      * Constructor for custom capacity
      * @param capacity the chosen capacity
      */
     public MinHeap(int capacity) {
-        this.capacity = capacity;
-        data = new Entry[this.capacity];
+        this.data = new Entry[capacity];
     }
 
     /**
@@ -185,7 +180,7 @@ public class MinHeap implements PriorityQueue{
     }
 
     /**
-     * Get the inedx of the right child of an element
+     * Get the index of the right child of an element
      * @param index the index of the element
      * @return the index of the right child of the element
      */

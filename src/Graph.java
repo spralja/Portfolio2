@@ -2,7 +2,8 @@ import java.util.*;
 
 public class Graph {
     private final HashMap<String, Vertex> vertices = new HashMap<>();
-    private class Vertex {
+
+    private static class Vertex {
         private final String key;
         private final ArrayList<Vertex> adjacent = new ArrayList<>();
         private final ArrayList<Integer> weights = new ArrayList<>();
@@ -20,13 +21,15 @@ public class Graph {
         public String getKey() {
             return this.key;
         }
+
     }
 
     public Graph(String[][] data) {
-        for(int i = 0; i < data.length; ++i) {
-            if(data[i][0] == null || data[i][1] == null || data[i][2] == null) continue;
-            getVertex(data[i][0]).addEdge(getVertex(data[i][1]), Integer.parseInt(data[i][2]));
+        for(String[] datum : data) {
+            if (datum[0] == null || datum[1] == null || datum[2] == null) continue;
+            getVertex(datum[0]).addEdge(getVertex(datum[1]), Integer.parseInt(datum[2]));
         }
+
     }
 
 
@@ -46,30 +49,26 @@ public class Graph {
     public static void printMSTPrims(Graph g) {
         Object[] vertices = g.vertices.keySet().toArray();
         String[] keys = new String[vertices.length];
-        for (int i = 0; i < keys.length; ++i) {
-            keys[i] = (String) vertices[i];
-        }
+        for(int i = 0; i < keys.length; ++i) keys[i] = (String) vertices[i];
 
         String curr = keys[0];
         PriorityQueue pq = new MinHeap();
         HashMap<String, Integer> dist = new HashMap<>();
-        for (int i = 0; i < keys.length; ++i) {
-            dist.put(keys[i], Integer.MAX_VALUE);
-            pq.insert(keys[i], dist.get(keys[i]));
+        for(String key : keys) {
+            dist.put(key, Integer.MAX_VALUE);
+            pq.insert(key, dist.get(key));
         }
 
         HashMap<String, String> parent = new HashMap<>();
         HashMap<String, Boolean> explored = new HashMap<>();
-        for(int i = 0 ; i < keys.length; ++i) {
-            explored.put(keys[i], false);
-        }
+        for(String key : keys) explored.put(key, false);
+
 
         dist.put(curr, 0);
         pq.update(curr, dist.get(curr));
         while (!pq.isEmpty()) {
             curr = pq.removeMin().getKey();
             explored.put(curr, true);
-            //System.out.println(curr + " -> " + parent.get(curr) + " = " + dist.get(curr));
             for (int i = 0; i < g.vertices.get(curr).adjacent.size(); ++i) {
                 if(explored.get(g.vertices.get(curr).adjacent.get(i).getKey())) continue;
                 if (g.vertices.get(curr).weights.get(i) >= dist.get(g.vertices.get(curr).adjacent.get(i).getKey()))
@@ -81,19 +80,20 @@ public class Graph {
                         g.vertices.get(curr).adjacent.get(i).getKey(),
                         dist.get(g.vertices.get(curr).adjacent.get(i).getKey())
                 );
+
             }
+
         }
 
-        for(int i = 0; i < keys.length; ++i) {
-            if(parent.get(keys[i]) == null) continue;
-            System.out.println(keys[i] + " " + parent.get(keys[i]) + " " + dist.get(keys[i]));
+        for(String key : keys) {
+            if (parent.get(key) == null) continue;
+            System.out.println(key + " " + parent.get(key) + " " + dist.get(key));
         }
 
         int r = 0;
-        for(int i = 0; i < keys.length; ++i) {
-            r += dist.get(keys[i]);
-        }
+        for(String key : keys) r += dist.get(key);
 
         System.out.println("Total cost: " + r + " DKK");
     }
+
 }
