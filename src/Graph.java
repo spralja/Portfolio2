@@ -1,13 +1,11 @@
-import javax.print.DocFlavor;
 import java.util.*;
-import java.util.function.BinaryOperator;
 
 public class Graph {
-    private HashMap<String, Vertex> vertices = new HashMap<>();
+    private final HashMap<String, Vertex> vertices = new HashMap<>();
     private class Vertex {
-        private String key;
-        private ArrayList<Vertex> adjacent = new ArrayList<>();
-        private ArrayList<Integer> weights = new ArrayList<>();
+        private final String key;
+        private final ArrayList<Vertex> adjacent = new ArrayList<>();
+        private final ArrayList<Integer> weights = new ArrayList<>();
         public Vertex(String key) {
             this.key = key;
         }
@@ -30,8 +28,6 @@ public class Graph {
             getVertex(data[i][0]).addEdge(getVertex(data[i][1]), Integer.parseInt(data[i][2]));
         }
     }
-
-    public Graph() {}
 
 
     public Vertex getVertex(String vertex) {
