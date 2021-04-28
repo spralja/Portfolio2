@@ -50,7 +50,8 @@ public class Main {
         };
 
         Graph g = new Graph(data);
-        Graph.printMSTPrims(g);
+        Graph.printMSTPrims(g, COST_PER_KM);
 
     }
+    
 }

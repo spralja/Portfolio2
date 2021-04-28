@@ -24,6 +24,10 @@ public class Graph {
 
     }
 
+    /**
+     * Generates a Graph from some data (like presented in the portfolio2 assignment)
+     * @param data
+     */
     public Graph(String[][] data) {
         for(String[] datum : data) {
             if (datum[0] == null || datum[1] == null || datum[2] == null) continue;
@@ -32,7 +36,11 @@ public class Graph {
 
     }
 
-
+    /**
+     * Get Vertex from vertex's name (if the vertex does not exist it creates it)
+     * @param vertex
+     * @return the associated vertex
+     */
     public Vertex getVertex(String vertex) {
         if(vertices.get(vertex) == null) {
             return addVertex(vertex);
@@ -46,7 +54,11 @@ public class Graph {
         return this.getVertex(vertex);
     }
 
-    public static void printMSTPrims(Graph g) {
+    /**
+     * Prints the MST of the Graph g, and the total cost in DKK (uses prims algorithm)
+     * @param g
+     */
+    public static void printMSTPrims(Graph g, int cost) {
         Object[] vertices = g.vertices.keySet().toArray();
         String[] keys = new String[vertices.length];
         for(int i = 0; i < keys.length; ++i) keys[i] = (String) vertices[i];
@@ -93,7 +105,7 @@ public class Graph {
         int r = 0;
         for(String key : keys) r += dist.get(key);
 
-        System.out.println("Total cost: " + r + " DKK");
+        System.out.println("Total cost: " + r * cost + " DKK");
     }
 
 }
